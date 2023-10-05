@@ -1,0 +1,6 @@
+[English]
+If you want to run the game, you need to first install love2D: https://love2d.org
+Once installed grab the folder Game_Code and drag it to the LOve2D.exe or it's shortcut.
+Now, you can play.
+
+[Spanish]
