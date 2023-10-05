@@ -22,3 +22,7 @@ end
 function Rectangle.draw(self)
     love.graphics.rectangle("line", self.x, self.y, self.width, self.height)
 end
+
+function Rectangle.drawFill(self)
+    love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
+end

@@ -23,7 +23,7 @@ function love.load()
   
   start = true
   alive = true
-  gameOver = false 
+  win = false
   
   
   frog = {
@@ -63,6 +63,7 @@ r11 = Rectangle(500, -200, 50, 50, 300) --x, y, width, height, speed
 r12 = Rectangle(600, 0, 50, 150, 300) --x, y, width, height, speed
 r13 = Rectangle(600, -400, 50, 150, 300) --x, y, width, height, speed
 
+vicLine = Rectangle(700, 0, 80, 620, 0) --x, y, width, height, speed
 end
 
 -- UPDATE  ---------------------------------------------------------------------------------------------------------
@@ -70,7 +71,8 @@ end
 function love.update(dt)
    
   if (alive) then
-   
+  
+   if (win ~= true) then
        r1:update(dt)
 	   r2:update(dt)
 	   r3:update(dt)
@@ -177,10 +179,17 @@ function love.update(dt)
 	frogCol(frog)
     end
 	
+		if checkCollision(vicLine, frogColission) then
+	win = true
+    end
+	
 	if ( frog.lives == 0) then
 	alive = false
 	end
+  
   end
+  end
+  
   
   if (alive ~= true) then
   if love.keyboard.isDown("r") then
@@ -188,17 +197,34 @@ function love.update(dt)
   frog.lives = 3
   alive = true
   end
-  
   end
   
+  if (win) then
+  if love.keyboard.isDown("r") then
+  frogCol(frog)
+  frog.lives = 3
+  win = false
+  end
+  end  
+  
+
+
 end
 
 
 -- DRAW  ---------------------------------------------------------------------------------------------------------
 function love.draw()
-  
+
+     vicLine:drawFill()
+	 
     if (alive ~=true) then
-	love.graphics.print('Press R to Re-Start!', 400, 310)
+	love.graphics.print('You Lost!', 300, 210)
+	love.graphics.print('Press R to Re-Start!', 300, 310)
+	end
+	
+	 if (win) then
+	love.graphics.print('You WON!', 300, 210)
+	love.graphics.print('Press R to Re-Start!', 300, 310)
 	end
 	
   r1:draw()
